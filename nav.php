@@ -254,7 +254,7 @@
                              <div class="input-item input-with-label">
                             <span class="input-item-label">QR Code</span><br>
                             <!-- <input class="input-bordered" type="text" placeholder="Amount" name="amount2" required value="" /> -->
-                            <output style="border:1px solid black;"><?php echo "<img src='upload/$qrcode' alt='QRcode' width='100%' height='100px'>";?></output>
+                            <output style="border:1px solid black;"><?php echo "<img src='upload/$qrcode' alt='QRcode' width='100%' height='300px'>";?></output>
                         </div>
 
                         <div class="input-item input-with-label">

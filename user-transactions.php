@@ -27,7 +27,7 @@ include('cookie.php');
                                     <div class="dt-type-text">Type</div>
                                 </th>
                                 <th class="data-col data-actions">
-                                     <div class="dt-type-text">Payment</div>
+                                     <div class="dt-type-text">Payment and Proof</div>
                                 </th>
                             </tr>
                         </thead>
@@ -54,12 +54,12 @@ include('cookie.php');
                                                                     </td>
                                 <td class="data-col dt-type">
                     <?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='dt-type-md badge badge-outline badge-success badge-md'>Credit</span>";}?>
-                                    <span class="dt-type-sm badge badge-sq badge-outline badge-success badge-md">c</span>
+                    <span class="dt-type-sm badge badge-sq badge-outline badge-success badge-md">c</span>
                                                 </td>
             <td class="data-col dt-type">
-                <a href="" data-toggle="modal" data-target="#view-address" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='badge badge-outline badge-primary badge-md'>Pay</span>";}?></a>
+                <a href="" data-toggle="modal" data-target="#view-address" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='btn btn-primary btn-md'>Pay and Upload Proof</span>";}?></a>
 
-                <a href="#" class="dt-type-sm badge badge-sq badge-outline badge-primary badge-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='badge badge-outline badge-primary badge-md'>Pay</span>";}?></a>
+                <a href="#" class="dt-type-sm badge badge-sq badge-outline badge-primary badge-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='btn btn-primary btn-md'>Pay and Upload Proof</span>";}?></a>
                                 </td>
                             </tr>
                                                     </tbody>

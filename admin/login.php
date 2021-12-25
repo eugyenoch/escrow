@@ -73,7 +73,7 @@ else{
 <div class="login-box sty1">
   <div class="login-box-body sty1">
   <div class="login-logo">
-    <a href="https://p2pxtrade.com"><img src="../dist/img/p2pdark.png" width="40%" height="50%" alt="p2pxtrade" title="P2Pxtrade"></a>
+    <a href="https://p2pxtrade.com"><img src="../dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
   </div>
     <p class="login-box-msg">Sign in to start your session - Admins only</p>
    <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="loginForm">

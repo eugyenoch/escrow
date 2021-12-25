@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 //Form validation
 //Import my security function from function.php
 include('function.php');
@@ -60,9 +63,9 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 <?php
 if(isset($_POST['reg'])){
   if($pass===$cpass){
-    $mailto = 'support@p2pxtrade.com';
-  $mailSub  = 'You have a new member';
-  $mailMsg  = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
+  $mailto = "support@p2pxtrade.com";
+  $mailSub  = "You have a new member";
+  $mailMsg  = "A new member has just registered on the platform. Login to the admin dashboard to see this person";
 
     $sql_check_email_exists = "SELECT * FROM users WHERE user_email = '$email'";
     $sql_check_email_exec = $con->query($sql_check_email_exists);
@@ -73,47 +76,47 @@ if(isset($_POST['reg'])){
   $sqlC = $con->query($sqlIns);
  if($sqlC){
   $toast = "success";
-  header("Refresh:2,url=preloader.php");
+  header("Refresh:3,url=preloader.php?fn=$firstname&em=$email");
 }else{$toast = "fail";} 
 }
 }
 $sql_wallet_insert = "INSERT INTO wallet(user_email) VALUES('$email')";
    $con->query($sql_wallet_insert);
 
-/*$sql_transact_insert = "INSERT INTO transaction(user_email) VALUES('$email')";
-   $con->query($sql_transact_insert);*/
 
-/*$sql_fund_insert = "INSERT INTO fund(user_email) VALUES('$email')";
-   $con->query($sql_fund_insert);
+//Load Composer's autoloader
+require 'admin/vendor/autoload.php';
 
-$sql_withdraw_insert = "INSERT INTO withdraw(user_email) VALUES('$email')";
-   $con->query($sql_withdraw_insert);*/
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
-require 'admin/mailer/PHPMailer-master/PHPMailerAutoload.php';
-$mail = new PHPMailer();
-$mail ->IsSmtp();
-$mail ->SMTPDebug = 0;
-$mail ->SMTPAuth = true;
-$mail ->SMTPSecure = 'ssl';
-$mail ->Host = "https://server315.web-hosting.com:2096/";
-$mail ->Port = 465; // or 587
-$mail ->IsHTML(true);
-$mail ->Username = "admin@p2pxtrade.com";
-$mail ->Password = "P2Padminmail01";
-$mail ->SetFrom("noreply@p2pxtrade.com");
-$mail ->Subject = $mailSub;
-$mail ->Body = $mailMsg;
-$mail ->AddAddress($mailto);
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'admin@p2pxtrade.com';                    //SMTP username
+    $mail->Password   = 'P2Padminmail01';                         //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-if($mail->Send()){echo " ";}
+    //Recipients
+    $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
+    $mail->addAddress($mailto, $fn);     //Add a recipient
 
-/*else
-{
-  echo "mail not sent";
-}*/
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = $mailSub;
+    $mail->Body    = $mailMsg
+    $mail->AltBody = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
+
+    $mail->send();
+     //$toast= "success"; //header("Refresh:2,url=login.php");
+} catch (Exception $e) {
+    echo " ";
 }
  $con->close();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -155,7 +158,7 @@ if($mail->Send()){echo " ";}
 <div class="login-box sty1">
   <div class="login-box-body sty1">
   <div class="login-logo">
-    <a href="https://p2pxtrade.com">ESCROW SIGNUP</a>
+    <a href="https://p2pxtrade.com"><img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
   </div>
     <p class="login-box-msg">Sign up to access your dashboard</p>
      <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" name="regForm">
@@ -221,7 +224,7 @@ if($mail->Send()){echo " ";}
 </html>
 <?php
 if(isset($toast) && $toast==='success'){
-  echo "<script>toastr.success('Lets verify and create your account', 'Notice')</script>";
+  echo "<script>toastr.success('Lets verify and create your account, hold on', 'Notice')</script>";
 }
 
 if(isset($toast) && $toast==='fail'){
