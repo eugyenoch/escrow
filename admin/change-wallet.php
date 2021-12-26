@@ -17,14 +17,20 @@ if(isset($_GET['dwa']) && $_GET['dwa']!==null){
     else{header('Location:addresses.php');}
    }
 
-if(isset($_COOKIE['wallet']) && $_COOKIE['wallet']!==null){   
+if(isset($_COOKIE['wallet']) && $_COOKIE['wallet']!==null){
+    $cookieWallet = $_COOKIE['wallet'];
+$ser = "SELECT `wallets` FROM `addresses` WHERE `id_no` = '$cookieWallet'";   
+$ser_exec = $con->query($ser);
+$ser_assoc = mysqli_fetch_assoc($ser_exec);
+$wallet_address_fetched = $ser_assoc['wallets']; 
     if(isset($_POST['editWallet'])){
     //$ewa = $_POST['idNo'];
     //setcookie("wallet",$_GET['ewa']);
+    $new_wallet = sanitize($_POST['wallet']);
     $walAddress = sanitize($_POST['address']);
     $walID = $_POST['idNo'];
-    echo"<script>alert('Wallet address alone will be updated')</script>";
-    $sql_walAddress = "UPDATE `addresses` SET `addresses`.`addresses` ='$walAddress' WHERE `addresses`.`id_no` = '$walID'";
+    echo"<script>alert('You are about to update wallet name and address, Do you want to proceed?')</script>";
+    $sql_walAddress = "UPDATE `addresses` SET `addresses`.`wallets`='$new_wallet',`addresses`.`addresses` ='$walAddress' WHERE `addresses`.`id_no` = '$walID'";
     if($con->query($sql_walAddress)===TRUE){echo"<script>location.href='addresses.php'</script>";}
 }
 }
@@ -83,7 +89,11 @@ $con->close();
                     <form method="post" action="<?= htmlentities($_SERVER['PHP_SELF']);?>" class="form-group">
                      <div class="form-group">
                          <input class="form-control form-control-line" type="text" name="idNo" value="<?php if(isset($_COOKIE['wallet']) && $_COOKIE['wallet']!==null){echo $_COOKIE['wallet'];}?>" hidden> 
-                        <label class="text-dark">Wallet Address</label><br>
+
+                          <label class="text-dark">Wallet</label><br>
+                        <input class="form-control form-control-line" type="text" name="wallet" placeholder="" value="<?= $wallet_address_fetched;?>" required>
+
+                        <label class="text-dark">Address</label><br>
                         <input class="form-control form-control-line" type="text" name="address" placeholder="Enter address" required>
                     </div>
                          <input type="submit" name="editWallet" class="btn btn-primary">

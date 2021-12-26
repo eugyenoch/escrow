@@ -47,7 +47,7 @@ try {
     $mail->AltBody = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
 
     $mail->send();
-     $toast= "success"; //header("Refresh:2,url=login.php");
+     $toast= "success"; header("Refresh:2,url=login.php");
 } catch (Exception $e) {
     echo " ";
 }

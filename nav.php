@@ -89,7 +89,9 @@
                             <label class="input-item-label">Select currency to fund</label>
                             <div class="select-wrapper">
                                 <select class="input-bordered" name="currency_id">
-                               <option value="Ethereum" >Ethereum</option>
+                                    <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
+                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
+                                         <!--  <option value="Ethereum" >Ethereum</option>
                                           <option value="Bitcoin" >Bitcoin</option>
                                           <option value="USD Coin" >USD Coin</option>
                                           <option value="Tron" >Tron</option>
@@ -133,7 +135,7 @@
                                           <option value="Chainlink" >Chainlink</option>
                                           <option value="The Sandbox" >The Sandbox</option>
                                           <option value="Polygon" >Polygon</option>
-                                          <option value="Binance Smart chain" >Binance Smart chain</option>
+                                          <option value="Binance Smart chain" >Binance Smart chain</option> -->
                                     </select>
                             </div>
                         </div>
@@ -166,7 +168,9 @@
                             <label class="input-item-label">Select withdrawal method</label>
                             <div class="select-wrapper">
                                 <select class="input-bordered" name="currency_id2">
-                                  <option value="Ethereum" >Ethereum</option>
+                                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
+                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
+                                <!--   <option value="Ethereum" >Ethereum</option>
                                           <option value="Bitcoin" >Bitcoin</option>
                                           <option value="USD Coin" >USD Coin</option>
                                           <option value="Tron" >Tron</option>
@@ -210,7 +214,7 @@
                                           <option value="Chainlink" >Chainlink</option>
                                           <option value="The Sandbox" >The Sandbox</option>
                                           <option value="Polygon" >Polygon</option>
-                                          <option value="Binance Smart chain" >Binance Smart chain</option>
+                                          <option value="Binance Smart chain" >Binance Smart chain</option> -->
                         </select>
                             </div>
                         </div>
@@ -259,8 +263,8 @@
 
                         <div class="input-item input-with-label">
                             <span class="input-item-label">Pay to this Address, afterwards, come back and click the upload proof button to upload proof</span>
-                            <output class="input-bordered"><?= $addresses;?></output>
-                         
+                            <input class="input-bordered" type="text" name="add" value="<?= $addresses;?>" id="myInput" disabled><br><button type="button" class="btn btn-primary" onclick="myFunction()"><!--  <span class="tooltiptext" id="myTooltip">Copy to clipboard</span> -->Copy address</button>
+                            <br><output id="displayText"></output>                    
                         </div>
                     <?php } }?>
 
@@ -273,3 +277,19 @@
         <!-- .modal-dialog -->
     </div>
     <!-- Modal End -->
+    <script type="text/javascript">
+        function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+
+  /*Display inside the output field provided*/
+  document.getElementById('displayText').innerHTML = "Address copied";
+}
+    </script>

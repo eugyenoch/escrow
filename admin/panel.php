@@ -26,6 +26,9 @@ include('../cookie.php');
                                 <th class="data-col dt-type">
                                     <div class="dt-type-text">Type</div>
                                 </th>
+                                <th class="data-col dt-type">
+                                    <!-- <div class="dt-type-text">Action</div> -->
+                                </th>
                                 <th class="data-col data-actions">
                                 </th>
                             </tr>
@@ -35,9 +38,9 @@ include('../cookie.php');
                                                         <tr class="data-item">
                                 <td class="data-col dt-tnxno">
                                     <div class="d-flex align-items-center">
-                                                                                <div class="data-state data-state-pending">
+                                                                                <!-- <div class="data-state data-state-pending">
                                             <span class="d-none">waiting</span>
-                                        </div>
+                                        </div> -->
                                             <div class="fake-class">
                                         <span class="lead tnx-id"><?php if(isset($ftxn) && $ftxn!==null){echo $ftxn;}?></span>
                                             <span class="sub sub-date"><?php if(isset($request_date) && $request_date!==null){echo $request_date;}?></span>
@@ -55,10 +58,10 @@ include('../cookie.php');
                     <?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='dt-type-md badge badge-outline badge-success badge-md'>Credit</span>";}?>
                                     <span class="dt-type-sm badge badge-sq badge-outline badge-success badge-md">c</span>
                                                 </td>
-                                <td class="data-col dt-type">
+                                <!-- <td class="data-col dt-type">
                                     <a href="" data-toggle="modal" data-target="#view-address" class="dt-type-md"><?php if(isset($request_date)&&isset($amount)&&isset($currency)&&isset($status)){echo "<span class='badge badge-outline badge-primary badge-md'>View</span>";}?></a>
                                     <a href="#" class="dt-type-sm badge badge-sq badge-outline badge-primary badge-md">View</a>
-                                </td>
+                                </td> -->
                             </tr>
                                                     </tbody>
                     </table>
@@ -81,6 +84,7 @@ include('../cookie.php');
                                     <div class="dt-type-text">Type</div>
                                 </th>
                                 <th class="data-col data-actions">
+                                    <!-- <div class="dt-type-text">Action</div> -->
                                 </th>
                             </tr>
                         </thead>
@@ -89,10 +93,10 @@ include('../cookie.php');
 
                                                         <tr class="data-item">
                                 <td class="data-col dt-tnxno">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center"><!-- 
                                                                                 <div class="data-state data-state-pending">
                                             <span class="d-none">waiting</span>
-                                        </div>
+                                        </div> -->
                                                                                 <div class="fake-class">
                                         <span class="lead tnx-id"><?php if(isset($wtxn) && $wtxn!==null){echo $wtxn;}?></span>
                                             <span class="sub sub-date"><?php if(isset($withdraw_request_date) && $withdraw_request_date!==null){echo $withdraw_request_date;}?></span>
@@ -170,8 +174,8 @@ include('../cookie.php');
     
     <!-- JavaScript (include all script here) -->
     <script src="https://transactright.com/js/app.js"></script>
-<script src="./assets/js/jquery.bundle49f7.js"></script>
-<script src="./assets/js/script49f7.js"></script>
+<script src="../assets/js/jquery.bundle49f7.js"></script>
+<script src="../assets/js/script49f7.js"></script>
        <!--  <script type="text/javascript">
         $('#reload').click(function() {
             $.ajax({

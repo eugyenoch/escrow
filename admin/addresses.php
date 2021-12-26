@@ -84,10 +84,27 @@ include('../cookie.php');
                     </table>
                 </div>
                               <!-- .card-innr -->
- 
+  
           <!-- .card -->
-                </div>
-
+          </div>
+          <div class="row">
+  <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" class="form
+    ">              
+<table class="table-responsive">
+    <tr>
+        <td class="">         
+            <input class="form-control form-control-line" type="text" name="newWallet" placeholder="currency">
+        </td>
+        <td>
+            <input class="form-control form-control-line" type="text" name="newAddress" placeholder="address">
+        </td>
+         <td>
+            <input class="btn btn-primary btn-outline" type="submit" name="addNewAddress" value="Add New Address">
+        </td>
+    </tr>
+</table>
+</form>
+</div>
         </div>
       <!-- .container -->
   </div>
@@ -156,12 +173,25 @@ include('../cookie.php');
 
 <!-- Toastr -->
 <script src="../dist/js/toastr.min.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   toastr.info('Admin and escrow wallet addresses can be managed from here','Info');
-</script>
+</script> -->
     </body>
     </html>
+    <?php 
+if(isset($_POST['addNewAddress'])){
+    $newWallet = sanitize($_POST['newWallet']);
+    $newAddress = sanitize($_POST['newAddress']);
+
+    $Sql_addNewAddress = "INSERT INTO `addresses`(`wallets`,`addresses`) VALUES('$newWallet','$newAddress')";
+    if($con->query($Sql_addNewAddress)===TRUE){$toast="addNewSuccess";}
+    else{$toast="failAddNewSuccess";}
+}
+?>
     <?php
 if(isset($toast) && $toast==='success'){echo "<script>toastr.success('You have updated database', 'Success')</script>";}
 if(isset($toast) && $toast==='fail'){echo "<script>toastr.error('Database could not be updated', 'Error')</script>";}
+if(isset($toast) && $toast==='addNewSuccess'){echo "<script>toastr.success('You have added a new wallet', 'Success')</script>";}
+if(isset($toast) && $toast==='failAddNewSuccess'){echo "<script>toastr.error('Wallet could not be added', 'Error')</script>";}
 ?>
+

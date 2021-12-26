@@ -14,7 +14,7 @@ if(isset($_POST['fund'])){
   /*$sql_fund_update = "UPDATE `fund` SET `currency` = '$currency', `amount` = '$amount' WHERE `fund`.`user_email` = '$user_email'";*/
 $sql_fund_update = "INSERT INTO fund(user_email,ftxn,currency,amount)VALUES('$user_email','$ftxn','$currency','$amount')";
   if($con->query($sql_fund_update) === TRUE){
-   echo "<script>alert('Your funding request is submitted and is pending approval')</script>";
+   //echo "<script>alert('Your funding request is submitted and is pending approval')</script>";
   echo"<script>location.href='user-transactions.php'</script>";}
   else{echo "<script>alert('There is a problem with your funding request, contact an administrator')</script>";}
 }
@@ -32,7 +32,7 @@ if(isset($_POST['withdraw'])){
   $sql_withdraw_update = "INSERT INTO withdraw(user_email,wtxn,wcurrency,wamount,wallet_address)VALUES('$user_email','$wtxn','$currency2','$amount2','$address')";
 
   if($con->query($sql_withdraw_update) === TRUE){
-   echo "<script>alert('Your withdrawal request is submitted and is pending approval')</script>";
+   //echo "<script>alert('Your withdrawal request is submitted and is pending approval')</script>";
     header('Refresh:2,url=user-transactions.php');}
   else{echo "<script>alert('There is a problem with your withdrawal request, please try again')</script>";}
 }
