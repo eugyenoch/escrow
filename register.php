@@ -61,17 +61,13 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 ?>
 
 <?php
+
 if(isset($_POST['reg'])){
   if($pass===$cpass){
-  $mailto = "support@p2pxtrade.com";
-  $mailSub  = "You have a new member";
-  $mailMsg  = "A new member has just registered on the platform. Login to the admin dashboard to see this person";
-
     $sql_check_email_exists = "SELECT * FROM users WHERE user_email = '$email'";
     $sql_check_email_exec = $con->query($sql_check_email_exists);
-    if(mysqli_num_rows($sql_check_email_exec)>0){
-      $toast = "email";
-    }else{
+    if(mysqli_num_rows($sql_check_email_exec)>0){$toast = "email";}
+    else{
   $sqlIns = "INSERT INTO users(firstname,lastname,user_email,user_pass)VALUES('$fname','$lname','$email','$cpass')";
   $sqlC = $con->query($sqlIns);
  if($sqlC){
@@ -79,10 +75,9 @@ if(isset($_POST['reg'])){
   header("Refresh:3,url=preloader.php?fn=$firstname&em=$email");
 }else{$toast = "fail";} 
 }
-}
+
 $sql_wallet_insert = "INSERT INTO wallet(user_email) VALUES('$email')";
    $con->query($sql_wallet_insert);
-
 
 //Load Composer's autoloader
 require 'admin/vendor/autoload.php';
@@ -103,19 +98,16 @@ try {
 
     //Recipients
     $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
-    $mail->addAddress($mailto, $fn);     //Add a recipient
+    $mail->addAddress('support@p2pxtrade.com');     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = $mailSub;
-    $mail->Body    = $mailMsg
-    $mail->AltBody = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
-
+    $mail->Subject = 'You have a new member';
+    $mail->Body    = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
+    $mail->AltBody = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
     $mail->send();
-     //$toast= "success"; //header("Refresh:2,url=login.php");
-} catch (Exception $e) {
-    echo " ";
-}
+} catch (Exception $e){echo " ";}
+}}
  $con->close();
 ?>
 <!DOCTYPE html>
@@ -158,7 +150,7 @@ try {
 <div class="login-box sty1">
   <div class="login-box-body sty1">
   <div class="login-logo">
-    <a href="https://p2pxtrade.com"><img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
+    <a href="#"><img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
   </div>
     <p class="login-box-msg">Sign up to access your dashboard</p>
      <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" name="regForm">

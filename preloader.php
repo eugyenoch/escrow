@@ -4,10 +4,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 //Require my functions.php file
 include('./function.php');
-//Begin cookie and include the cookie file
-//include('./cookie.php');
-?>
-<?php 
+
 include('header.php'); 
 
 //Load Composer's autoloader
@@ -17,10 +14,8 @@ require 'admin/vendor/autoload.php';
 // require 'admin/mailer/PHPMailer/src/PHPMailer.php';
 // require 'admin/mailer/PHPMailer/src/SMTP.php';
 
-/* Start to develop here. Best regards https://php-download.com/ */
 if(isset($_GET['fn']) && isset($_GET['em'])){
     $fn = $_GET['fn']; $em = $_GET['em']; $active = "<a href='https://p2pxtrade.com/login?em=$em'>Activate</a>";
-
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -48,9 +43,9 @@ try {
 
     $mail->send();
      $toast= "success"; header("Refresh:2,url=login.php");
-} catch (Exception $e) {
-    echo " ";
+ } catch (Exception $e){echo "";}
 }
+else{echo "<script>location.href='login.php'</script>";}
 ?>
 <body class="page-user">
  <div class="col-12" style="transform:translateY(25%);">

@@ -83,5 +83,10 @@
       visibility: visible;
       opacity: 1;
     }
+
+    .logoTxt{font-weight:900; font-family:tahoma,poppins,open-sans; 
+        font-size:24px; color:#fff;}
+
+    .logoHr{width:50%; border:1px solid #fff !important; position:relative; margin-top: 0; padding-top: 0;}
     </style>
 </head>
