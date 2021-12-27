@@ -26,8 +26,8 @@ try {
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'admin@p2pxtrade.com';                    //SMTP username
-    $mail->Password   = 'P2Padminmail01';                         //SMTP password
+    $mail->Username   = 'noreply@p2pxtrade.com';                    //SMTP username
+    $mail->Password   = 'NOREPLYmail01';                         //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -42,14 +42,14 @@ try {
     $mail->AltBody = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
 
     $mail->send();
-     $toast= "success"; header("Refresh:2,url=login.php");
+     $toast= "success"; header("Refresh:1,url=login.php");
  } catch (Exception $e){echo "";}
 }
 else{echo "<script>location.href='login.php'</script>";}
 ?>
 <body class="page-user">
  <div class="col-12" style="transform:translateY(25%);">
-<h1 style="color:#000 !important;"><center>We are checking your information in the background.<br> <!-- You will be redirected after -->Please check your email for activation. If you did not get an email, then we could not verify your email address. </center></h1>
+<h1 style="color:#000 !important;"><center>We are checking your information in the background.<br> <!-- You will be redirected after -->Please check your email for activation. If you did not get an email, then we could not verify your email address. You may close this page now </center></h1>
 </div>
     <!-- jQuery 3 --> 
 <script src="dist/js/jquery.min.js"></script> 
