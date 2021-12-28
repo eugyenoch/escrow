@@ -71,9 +71,9 @@ else{
 <div class="login-box sty1">
   <div class="login-box-body sty1">
   <div class="login-logo">
-    <a href="#"><img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
+    <a href="#"><span class="lead">Login To Your Escrow Account</span><!-- <img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"> --></a>
   </div>
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Enter correct login details to begin your session</p>
    <form action="<?= htmlentities($_SERVER['PHP_SELF']);?>" method="post" name="loginForm">
       <div class="form-group has-feedback">
         <input type="email" class="form-control sty1" placeholder="Username" name="user" title="Username is required" value="<?php if(isset($_COOKIE['email'])){echo $_COOKIE['email'];}?>" required>

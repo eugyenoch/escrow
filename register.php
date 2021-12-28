@@ -147,9 +147,10 @@ try {
 <div class="login-box sty1">
   <div class="login-box-body sty1">
   <div class="login-logo">
-    <a href="#"><img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"></a>
+    <a href="#"><span class="lead">Create An Escrow Account</span>
+      <!-- <img src="dist/img/p2pdark.png" width="" height="" alt="p2pxtrade" title="P2Pxtrade"> --></a>
   </div>
-    <p class="login-box-msg">Sign up to access your dashboard</p>
+    <p class="login-box-msg">Fill the signup form to create your data</p>
      <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" name="regForm">
       <div class="form-group has-feedback">
         <input type="text" name="fname" class="form-control sty1" placeholder="Firstname" required>
@@ -185,7 +186,7 @@ try {
         </div>
         <!-- /.col -->
         <div class="col-xs-4 m-t-1">
-          <div class="m-t-2">Already have an account? <a href="login.php" class="text-center">Sign In</a></div>
+          <div class="m-t-1">Already have an account? <a href="login.php" class="text-center">Sign In</a></div>
           <button type="submit" class="btn btn-primary btn-block btn-flat" name="reg">Sign Up</button>
         </div>
         <!-- /.col --> 
