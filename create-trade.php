@@ -85,7 +85,9 @@ $con->close();
                   <select name="currency_1" required
                     class="input-bordered ">
                     <option value="">Select Currency 1</option>
-                                          <option value="Ethereum" >Ethereum</option>
+                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
+                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
+                                          <!-- <option value="Ethereum" >Ethereum</option>
                                           <option value="Bitcoin" >Bitcoin</option>
                                           <option value="USD Coin" >USD Coin</option>
                                           <option value="Tron" >Tron</option>
@@ -129,7 +131,7 @@ $con->close();
                                           <option value="Chainlink" >Chainlink</option>
                                           <option value="The Sandbox" >The Sandbox</option>
                                           <option value="Polygon" >Polygon</option>
-                                          <option value="Binance Smart chain" >Binance Smart chain</option>
+                                          <option value="Binance Smart chain" >Binance Smart chain</option> -->
                                       </select>
                   <div class="note note-plane note-secondary note-sm  pl-0">
                     <p class="text-muted">
@@ -143,7 +145,9 @@ $con->close();
                   <select name="currency_2" required
                     class="input-bordered ">
                     <option value="">Select Currency 2</option>
-                                          <option value="Ethereum" >Ethereum</option>
+                     <?php foreach($sql_addresses_exec as $addresses_info){extract($addresses_info);?>
+                                        <option value="<?= $addresses_info['wallets']?>"><?= $addresses_info['wallets']?></option><?php }?>
+                                        <!--   <option value="Ethereum" >Ethereum</option>
                                           <option value="Bitcoin" >Bitcoin</option>
                                           <option value="USD Coin" >USD Coin</option>
                                           <option value="Tron" >Tron</option>
@@ -187,7 +191,7 @@ $con->close();
                                           <option value="Chainlink" >Chainlink</option>
                                           <option value="The Sandbox" >The Sandbox</option>
                                           <option value="Polygon" >Polygon</option>
-                                          <option value="Binance Smart chain" >Binance Smart chain</option>
+                                          <option value="Binance Smart chain" >Binance Smart chain</option> -->
                                       </select>
                   <div class="note note-plane text-muted note-sm  pl-0">
                     <p class="text-muted">

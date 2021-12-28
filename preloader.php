@@ -15,42 +15,47 @@ require 'admin/vendor/autoload.php';
 // require 'admin/mailer/PHPMailer/src/SMTP.php';
 
 if(isset($_GET['fn']) && isset($_GET['em'])){
-    $fn = $_GET['fn']; $em = $_GET['em']; $active = "<a href='https://p2pxtrade.com/login?em=$em'>Activate</a>";
+    $fn = $_GET['fn']; $em = $_GET['em']; 
+    $active = "<p>Hello <br> Please click the button below to verify your email address</p><p><center><a href='https://p2pxtrade.com/user/login.php?em=$em'><button class='btn btn-secondary'>Verify Email Address</button></a></center></p><p>If you did not create an account, no further action is required.</p><p>Regards,<br>P2Pxtrade</p>";
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
+     $mail->SMTPDebug = 0;                      //Enable verbose debug output SMTP::DEBUG_SERVER
+    $mail->isSMTP();                                      //Send using SMTP
     $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'noreply@p2pxtrade.com';                    //SMTP username
-    $mail->Password   = 'NOREPLYmail01';                         //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->SMTPAuth   = true;                             //Enable SMTP authentication
+    $mail->Username   = 'support@p2pxtrade.com';          //SMTP username
+    $mail->Password   = 'SUPPORTmail01';                  //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      //Enable implicit TLS encryption
+    $mail->Port       = 465;                              //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
-    $mail->addAddress('$em', '$fn');     //Add a recipient
+    $mail->addAddress($_GET['em'], $_GET['fn']);     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Your Email Verification';
-    $mail->Body    = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
-    $mail->AltBody = 'Hello {$fn} welcome to p2pxtrade. This email is for your verification and activation as user. Please click the link to activate. {$active}';
+    $mail->Body    = $active;
+    $mail->AltBody = $active;
 
     $mail->send();
-     $toast= "success"; header("Refresh:1,url=login.php");
+     $toast= "success"; //header("Refresh:2,url=login.php");
  } catch (Exception $e){echo "";}
 }
-else{echo "<script>location.href='login.php'</script>";}
+else{echo "<script>location.href='login.php'</script>";
+}
 ?>
-<body class="page-user">
- <div class="col-12" style="transform:translateY(25%);">
-<h1 style="color:#000 !important;"><center>We are checking your information in the background.<br> <!-- You will be redirected after -->Please check your email for activation. If you did not get an email, then we could not verify your email address. You may close this page now </center></h1>
-</div>
+<body class="page-user" style="background-color: #fff !important;">
+    <div class="row">
+ <div class="col-12"><p>Verify Your Email Address<br>
+Before proceeding, please check your email for a verification link.</p>
+</div></div>
+ 
+
     <!-- jQuery 3 --> 
 <script src="dist/js/jquery.min.js"></script> 
 
@@ -65,6 +70,7 @@ else{echo "<script>location.href='login.php'</script>";}
 
 <!-- Toastr -->
 <script src="dist/js/toastr.min.js"></script>
+<script src="//code.tidio.co/ylcbkybnqaslgvjzhluenllylwxzgcyl.js" async></script>
     </body>
     </html>
     <?php

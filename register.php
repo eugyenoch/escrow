@@ -64,6 +64,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 if(isset($_POST['reg'])){
   if($pass===$cpass){
+    $active = "<a href='https://p2pxtrade.com/users/admin/login.php>Login</a>";
     $sql_check_email_exists = "SELECT * FROM users WHERE user_email = '$email'";
     $sql_check_email_exec = $con->query($sql_check_email_exists);
     if(mysqli_num_rows($sql_check_email_exec)>0){$toast = "email";}
@@ -71,15 +72,7 @@ if(isset($_POST['reg'])){
   $sqlIns = "INSERT INTO users(firstname,lastname,user_email,user_pass)VALUES('$fname','$lname','$email','$cpass')";
   $sqlC = $con->query($sqlIns);
  if($sqlC){
-  $toast = "success";
-  header("Refresh:3,url=preloader.php?fn=$firstname&em=$email");
-}else{$toast = "fail";} 
-}
-
-$sql_wallet_insert = "INSERT INTO wallet(user_email) VALUES('$email')";
-   $con->query($sql_wallet_insert);
-
-//Load Composer's autoloader
+  //Load Composer's autoloader
 require 'admin/vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
@@ -87,26 +80,30 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->SMTPDebug = 0;                      //Enable verbose debug output SMTP::DEBUG_SERVER
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'noreply@p2pxtrade.com';                    //SMTP username
-    $mail->Password   = 'NOREPLYmail01';                         //SMTP password
+    $mail->Username   = 'support@p2pxtrade.com';                //SMTP username
+    $mail->Password   = 'SUPPORTmail01';                        //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = 465;                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
-    $mail->addAddress('support@p2pxtrade.com');     //Add a recipient
+    $mail->addAddress('admin@p2pxtrade.com');     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'You have a new member';
-    $mail->Body    = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
+    $mail->Body    = 'A new member has just registered on the platform. Login to the admin dashboard to see this person. https://p2pxtrade.com/users/admin/login.php';
     $mail->AltBody = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
     $mail->send();
 } catch (Exception $e){echo " ";}
+
+  $toast = "success";header("Refresh:2,url=preloader.php?fn=$fname&em=$email");
+}else{$toast = "fail";} 
+}
 }}
  $con->close();
 ?>
@@ -216,7 +213,7 @@ try {
 </html>
 <?php
 if(isset($toast) && $toast==='success'){
-  echo "<script>toastr.success('Lets verify and create your account, hold on', 'Notice')</script>";
+  echo "<script>toastr.success('Lets verify and create your account', 'Notice')</script>";
 }
 
 if(isset($toast) && $toast==='fail'){
