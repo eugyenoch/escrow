@@ -13,7 +13,7 @@
                         <!-- .topbar-nav-item -->
                     </ul>
                     <!-- .topbar-nav -->
-                    <a class="topbar-logo" href="https://p2pxtrade.com" target="_blank" rel="noopener"><img src="../dist/img/p2pdark.png" alt="logo" /></a>
+                    <a class="topbar-logo" href="" target="_blank" rel="noopener"></a>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative"><span class="user-welcome d-none d-lg-inline-block">Hello&nbsp;<?php if(isset($firstname) && isset($lastname)){echo $firstname."&nbsp;".$lastname;}?></span><a class="toggle-tigger user-thumb" href="#"><img src="<?php if(isset($profile_photo) && $profile_photo!==null){echo $profile_photo;}?>"><i class="fa fa--user"></i></a>
                             <div class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown dds">

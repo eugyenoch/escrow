@@ -63,9 +63,11 @@ if(!isset($_SESSION['email'])){header('Location:login.php');}
 <h6 class="card-sub-title">Crypto Balances</h6>
 <ul class="token-balance-list row">
 
-<li class="token-balance-sub col-md-12 col-lg-6 mb-3">
-<span class="lead"><?php if(isset($amount) && $amount!==null){echo $amount;} ?></span>
-<span class="sub"><?php if(isset($currency) && $currency!==null){echo $currency;} ?></span>
+<li class="token-balance-sub col-md-12 col-lg-6 mb-3"><?php
+    foreach($sql_fund_exec as $fund_info){extract($fund_info);?>
+<span class="lead"><?php if(isset($fund_info['status']) && $fund_info['status']==="approved"){echo $amount;} ?></span>
+<span class="sub"><?php if(isset($fund_info['status']) && $fund_info['status']==="approved"){echo $currency;} ?></span>
+<?php } ?>
 </li>
                         </ul>
 </div>
