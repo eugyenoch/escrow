@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 if(isset($_POST['reg'])){
   if($pass===$cpass){
-    $active = "<a href='https://p2pxtrade.com/users/admin/login.php>Login</a>";
+    $active = "";
     $sql_check_email_exists = "SELECT * FROM users WHERE user_email = '$email'";
     $sql_check_email_exec = $con->query($sql_check_email_exists);
     if(mysqli_num_rows($sql_check_email_exec)>0){$toast = "email";}
@@ -73,7 +73,7 @@ if(isset($_POST['reg'])){
   $sqlC = $con->query($sqlIns);
  if($sqlC){
   //Load Composer's autoloader
-require 'admin/vendor/autoload.php';
+//require 'admin/vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -82,21 +82,21 @@ try {
     //Server settings
     $mail->SMTPDebug = 0;                      //Enable verbose debug output SMTP::DEBUG_SERVER
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
+    $mail->Host       = '';        //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'support@p2pxtrade.com';                //SMTP username
-    $mail->Password   = 'SUPPORTemail001';                        //SMTP password
+    $mail->Username   = '';                //SMTP username
+    $mail->Password   = '';                        //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
-    $mail->addAddress('admin@p2pxtrade.com');     //Add a recipient
+    $mail->setFrom();
+    $mail->addAddress();     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'You have a new member';
-    $mail->Body    = 'A new member has just registered on the platform. Login to the admin dashboard to see this person. https://p2pxtrade.com/users/admin/login.php';
+    $mail->Body    = 'A new member has just registered on the platform. Login to the admin dashboard to see this person.';
     $mail->AltBody = 'A new member has just registered on the platform. Login to the admin dashboard to see this person';
     $mail->send();
 } catch (Exception $e){echo " ";}
@@ -112,7 +112,7 @@ try {
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Member Registration | P2pxTrade</title>
+<title>Member Registration</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
@@ -180,7 +180,7 @@ try {
           <div class="checkbox icheck">
             <label>
               <input type="checkbox" name="agreement" required>
-               I agree to the <a href="https://p2pxtrade.com/terms-of-use.php" title="View terms of use" target="_blank" rel="noopener noreferrer">Terms Of Use</a></label><br>
+               I agree to the <a href="" title="View terms of use" target="_blank" rel="noopener noreferrer">Terms Of Use</a></label><br>
                <span class="err"><?= $checkErr; ?></span>
              </div>
         </div>

@@ -8,7 +8,7 @@ include('./function.php');
 include('header.php'); 
 
 //Load Composer's autoloader
-require 'admin/vendor/autoload.php';
+//require 'admin/vendor/autoload.php';
 
 // require 'admin/mailer/PHPMailer/src/Exception.php';
 // require 'admin/mailer/PHPMailer/src/PHPMailer.php';
@@ -27,15 +27,15 @@ try {
     //Server settings
      $mail->SMTPDebug = 0;                      //Enable verbose debug output SMTP::DEBUG_SERVER
     $mail->isSMTP();                                      //Send using SMTP
-    $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
+    $mail->Host       = '';        //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                             //Enable SMTP authentication
-    $mail->Username   = 'support@p2pxtrade.com';          //SMTP username
-    $mail->Password   = 'SUPPORTemail001';                  //SMTP password
+    $mail->Username   = '';          //SMTP username
+    $mail->Password   = '';                  //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      //Enable implicit TLS encryption
     $mail->Port       = 465;                              //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('noreply@p2pxtrade.com', 'p2pxtrade');
+    $mail->setFrom();
     $mail->addAddress($_GET['em'], $_GET['fn']);     //Add a recipient
 
     //Content
