@@ -15,10 +15,11 @@ if(isset($_POST['fund'])){
 $sql_fund_update = "INSERT INTO fund(user_email,ftxn,currency,amount)VALUES('$user_email','$ftxn','$currency','$amount')";
   if($con->query($sql_fund_update) === TRUE){
    //echo "<script>alert('Your funding request is submitted and is pending approval')</script>";
-  echo"<script>location.href='user-transactions.php'</script>";}
+  echo"<script>location.href='user-transactions.php'</script>";
+  //header("Refresh:1,url=user-transactions.php");
+}
   else{echo "<script>alert('There is a problem with your funding request, contact an administrator')</script>";}
 }
-
 if(isset($_POST['withdraw'])){
   //Extract variables from user input
   $wtxn = $_POST['Wtxn'];
@@ -36,7 +37,6 @@ if(isset($_POST['withdraw'])){
     header('Refresh:2,url=user-transactions.php');}
   else{echo "<script>alert('There is a problem with your withdrawal request, please try again')</script>";}
 }
-
 
 /*if(!isset($_POST['fund']) || !isset($_POST['withdraw']) || !isset($_POST['proofUpload'])){
 	header('Location:user-area.php');

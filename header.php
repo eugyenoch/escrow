@@ -88,5 +88,28 @@
         font-size:24px; color:#fff;}
 
     .logoHr{width:50%; border:1px solid #fff !important; position:relative; margin-top: 0; padding-top: 0;}
+ @media screen and (min-width:601px){
+.showTb{display: none;}
+}
+    @media screen and (max-width: 600px){
+
+  tr,td,th,.btnTarget{
+    width:100% !important;
+    float:left !important;
+  }
+
+  .hideTb{display: none !important;}
+  /*.showTb{display: grid !important; grid-template-columns: auto auto !important;}*/
+
+  .myrow{width: 100% !important;}
+  .mycolumn{width: 50% !important; float: left !important;}
+
+  .intermediate{font-family: tahoma; font-weight:400;}
+  .intermediate:nth-child(odd){background-color: lightgrey;}
+
+}
+
+
+
     </style>
 </head>

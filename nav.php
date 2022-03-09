@@ -12,7 +12,7 @@
                         <!-- .topbar-nav-item -->
                     </ul>
                     <!-- .topbar-nav -->
-                    <a class="topbar-logo" href="#" target="_blank" rel="noopener"><span class="logoTxt">p2pxtrade<hr class="logoHr"></span></a>
+                    <a class="topbar-logo" href="#" target="_blank" rel="noopener"></a>
                     <ul class="topbar-nav">
                         <li class="topbar-nav-item relative"><span class="user-welcome d-none d-lg-inline-block">Hello&nbsp;<?php if(isset($firstname) && isset($lastname)){echo $firstname."&nbsp;".$lastname;}?></span><a class="toggle-tigger user-thumb" href="#"><img src="<?php if(isset($profile_photo) && $profile_photo!==null){echo $profile_photo;}?>"><i class="fa fa-user"></i></a>
                             <div class="toggle-class dropdown-content dropdown-content-right dropdown-arrow-right user-dropdown dds">
@@ -248,8 +248,8 @@
                         </div>                
                         <?php 
                         if(isset($_COOKIE['currency']) && $_COOKIE['currency']!==null){
+                            
                             $cookieCurrency = $_COOKIE['currency'];
-                        
                         $show_address = "SELECT * FROM `addresses` WHERE `addresses`.`wallets` = '$cookieCurrency'";
 
                         $show_address_exec = $con->query($show_address);
@@ -262,13 +262,13 @@
                         </div>
 
                         <div class="input-item input-with-label">
-                            <span class="input-item-label">Pay to this Address, afterwards, come back and click the upload proof button to upload proof</span>
-                            <input class="input-bordered" type="text" name="add" value="<?= $addresses;?>" id="myInput" disabled><br><button type="button" class="btn btn-primary" onclick="myFunction()"><!--  <span class="tooltiptext" id="myTooltip">Copy to clipboard</span> -->Copy address</button>
+                           <!--  <span class="input-item-label">Pay to this Address, afterwards, come back and click the upload proof button to upload proof</span> -->
+                            <input class="input-bordered" type="text" name="add" value="<?= $addresses;?>" id="myInput" disabled><br><button type="button" class="btn btn-primary" onclick="myFunction()">Copy address</button>
                             <br><output id="displayText"></output>                    
                         </div>
                     <?php } }?>
 
-                        <a href="upload-proof.php" class="btn btn-primary btn-between" name="upload-proof">Click To Upload Proof&nbsp;<i class="fa fa-forward"></i></a>
+                        <!-- <a href="upload-proof.php" class="btn btn-primary btn-between" name="upload-proof">Click To Upload Proof&nbsp;<i class="fa fa-forward"></i></a> -->
                     </form>
                 </div>
             </div>
@@ -280,16 +280,18 @@
     <script type="text/javascript">
         function myFunction() {
   /* Get the text field */
-  var copyText = document.getElementById("myInput");
+  var copyTexts = document.getElementById("myInput");
 
   /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  copyTexts.select();
+  copyTexts.setSelectionRange(0, 99999); /* For mobile devices */
 
    /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
+  navigator.clipboard.writeText(copyTexts.value);
 
   /*Display inside the output field provided*/
   document.getElementById('displayText').innerHTML = "Address copied";
+
 }
+
     </script>

@@ -16,7 +16,9 @@ require 'admin/vendor/autoload.php';
 
 if(isset($_GET['fn']) && isset($_GET['em'])){
     $fn = $_GET['fn']; $em = $_GET['em']; 
-    $active = "<p>Hello <br> Please click the button below to verify your email address</p><p><center><a href='https://p2pxtrade.com/user/login.php?em=$em'><button class='btn btn-secondary'>Verify Email Address</button></a></center></p><p>If you did not create an account, no further action is required.</p><p>Regards,<br>P2Pxtrade</p>";
+    $active = "<p>Welcome! If you are receiving this mail then your account has been successfully activated and you can proceed to transact and trade on the platform.<br>
+We offer 24/7 live support for safe transactions/disputes settling.<br>
+Any issues encountered kindly contact support for further assistance</p>";
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -28,7 +30,7 @@ try {
     $mail->Host       = 'p2pxtrade.com';        //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                             //Enable SMTP authentication
     $mail->Username   = 'support@p2pxtrade.com';          //SMTP username
-    $mail->Password   = 'SUPPORTmail01';                  //SMTP password
+    $mail->Password   = 'SUPPORTemail001';                  //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      //Enable implicit TLS encryption
     $mail->Port       = 465;                              //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -43,7 +45,7 @@ try {
     $mail->AltBody = $active;
 
     $mail->send();
-     $toast= "success"; //header("Refresh:2,url=login.php");
+     $toast= "success"; header("Refresh:2,url=login.php");
  } catch (Exception $e){echo "";}
 }
 else{echo "<script>location.href='login.php'</script>";
@@ -51,8 +53,9 @@ else{echo "<script>location.href='login.php'</script>";
 ?>
 <body class="page-user" style="background-color: #fff !important;">
     <div class="row">
- <div class="col-12"><p>Verify Your Email Address<br>
-Before proceeding, please check your email for a verification link.</p>
+ <div class="col-12"><p><big>Welcome to p2pxtrade!<br>
+Kindly check your mail inbox for the welcome mail to certify verification.<br> 
+Safe trade, swift and secure transactions.</big></p>
 </div></div>
  
 
@@ -76,3 +79,4 @@ Before proceeding, please check your email for a verification link.</p>
     <?php
 if(isset($toast) && $toast==='success'){echo "<script>toastr.success('You may close this page and check your email address to continue.', 'Successful Verification')</script>";}
 ?>
+

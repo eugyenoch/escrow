@@ -18,6 +18,5 @@
 
     if(isset($currency) && $currency!==null){
         setcookie("currency",$currency);
-        //header("Refresh:0.5,url=user-transactions.php");
     }
 ?>
